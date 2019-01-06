@@ -1,0 +1,76 @@
+################################################################################
+# RELIC-16 Assembler Standard Library: Copy v1.0 alpha
+#
+# Copyright 2018-2019 Juan Irming
+#
+# This file is part of rasm16.
+#
+# rasm16 is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rasm16 is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with rasm16.  If not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+# data8 copies [IO] number of bytes from source *[GP0] to target *[GP1],
+# optionally terminating on a null source byte if [IO] is set to [NULL] when
+# data8 is called. Returns the number of bytes copied.
+
+data8
+
+    CO  [GP0],data8_start_source_addr
+
+data8_loop0
+    CM  $[NULL],[IO]
+    NE  $data8_skip0
+
+    CM8 $[NULL],*[GP0]
+    EQ  $data8_done0
+
+data8_skip0
+    CO8 *[GP0],*[GP1]
+
+    AD  $1,[GP0]
+    AD  $1,[GP1]
+
+    SU  $1,[IO]
+
+    CM  $0,[IO]
+    NE  $data8_loop0
+
+data8_done0
+    CO  [GP0],data8_bytes_copied
+    SU  data8_start_source_addr,data8_bytes_copied
+
+    RT  data8_bytes_copied # data8
+
+data8_start_source_addr
+    $   0
+
+data8_bytes_copied
+    $   0
+
+################################################################################
+# data16 copies [IO] number of words from source *[GP0] to target *[GP1].
+
+data16
+
+    CO  *[GP0],*[GP1]
+
+    AD  $2,[GP0]
+    AD  $2,[GP1]
+
+    SU  $1,[IO]
+
+    CM  $0,[IO]
+    NE  data16
+
+    RT  $[NULL] # data16
+

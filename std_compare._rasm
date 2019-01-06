@@ -1,0 +1,51 @@
+################################################################################
+# RELIC-16 Assembler Standard Library: Compare v1.0 alpha
+#
+# Copyright 2018-2019 Juan Irming
+#
+# This file is part of rasm16.
+#
+# rasm16 is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# rasm16 is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with rasm16.  If not, see <http://www.gnu.org/licenses/>.
+
+################################################################################
+# data8 compares [IO] number of bytes between source *[GP0] and target *[GP1],
+# optionally terminating on a null source byte if [IO] is set to [NULL] when
+# data8 is called. Returns [TRUE] if all bytes match, [FALSE] if not.
+
+data8
+
+    CM  $[NULL],[IO]
+    NE  $data8_skip0
+
+    CM8 $[NULL],*[GP0]
+    EQ  $data8_done0
+
+data8_skip0
+    CM8 *[GP0],*[GP1]
+    NE  $data8_mismatch
+
+    AD  $1,[GP0]
+    AD  $1,[GP1]
+
+    SU  $1,[IO]
+
+    CM  $0,[IO]
+    NE  $data8
+
+data8_done0
+    RT  [TRUE] # data8
+
+data8_mismatch
+    RT  [FALSE] # data8
+
