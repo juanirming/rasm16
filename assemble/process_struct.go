@@ -30,7 +30,7 @@ import (
 // -----------------------------------------------------------------------------
 
 // Maximum address space limit.
-const maxAddressSpace int = 0xFFB0 - 2 * 64 // Leaving space for call stack below Stack Pointer.
+const maxAddressSpace int = 0xFFB0 - 2*64 // Leaving space for call stack below Stack Pointer.
 
 // Parser token definitions.
 const (
@@ -105,49 +105,49 @@ var mnemonicAliases = map[string]string{
 type mnemonic struct {
 	descr       string
 	opcode      byte
-    numOps      int
+	numOps      int
 	instrLength int
 }
 
 // Mnemonic definitions (instructions and directives).
 var mnemonics = map[string]mnemonic{
 	// Instructions
-    "NO":   {descr: "NO OPERATION", opcode: 0x00, numOps: 0, instrLength: 1},
-    "CO8":  {descr: "COPY", opcode: 0x01, numOps: 2, instrLength: 4},
-    "CO16": {descr: "COPY", opcode: 0x02, numOps: 2, instrLength: 5},
-    "AD8":  {descr: "ADD", opcode: 0x03, numOps: 2, instrLength: 4},
-    "AD16": {descr: "ADD", opcode: 0x04, numOps: 2, instrLength: 5},
-    "SU8":  {descr: "SUBTRACT", opcode: 0x05, numOps: 2, instrLength: 4},
-    "SU16": {descr: "SUBTRACT", opcode: 0x06, numOps: 2, instrLength: 5},
-    "MU8":  {descr: "MULTIPLY", opcode: 0x07, numOps: 2, instrLength: 4},
-    "MU16": {descr: "MULTIPLY", opcode: 0x08, numOps: 2, instrLength: 5},
-    "DV8":  {descr: "DIVIDE", opcode: 0x09, numOps: 2, instrLength: 4},
-    "DV16": {descr: "DIVIDE", opcode: 0x0A, numOps: 2, instrLength: 5},
-    "ND8":  {descr: "BITWISE AND", opcode: 0x0B, numOps: 2, instrLength: 4},
-    "ND16": {descr: "BITWISE AND", opcode: 0x0C, numOps: 2, instrLength: 5},
-    "OR8":  {descr: "BITWISE OR", opcode: 0x0D, numOps: 2, instrLength: 4},
-    "OR16": {descr: "BITWISE OR", opcode: 0x0E, numOps: 2, instrLength: 5},
-    "XR8":  {descr: "BITWISE XOR", opcode: 0x0F, numOps: 2, instrLength: 4},
-    "XR16": {descr: "BITWISE XOR", opcode: 0x10, numOps: 2, instrLength: 5},
-    "SL8":  {descr: "BITWISE SHIFT LEFT", opcode: 0x11, numOps: 2, instrLength: 4},
-    "SL16": {descr: "BITWISE SHIFT LEFT", opcode: 0x12, numOps: 2, instrLength: 5},
-    "SR8":  {descr: "BITWISE SHIFT RIGHT", opcode: 0x13, numOps: 2, instrLength: 4},
-    "SR16": {descr: "BITWISE SHIFT RIGHT", opcode: 0x15, numOps: 2, instrLength: 5},
-    "CM8":  {descr: "COMPARE", opcode: 0x15, numOps: 2, instrLength: 4},
-    "CM16": {descr: "COMPARE", opcode: 0x16, numOps: 2, instrLength: 5},
-    "EQ":   {descr: "JUMP IF EQUAL", opcode: 0x17, numOps: 1, instrLength: 3},
-    "NE":   {descr: "JUMP IF NOT EQUAL", opcode: 0x18, numOps: 1, instrLength: 3},
-    "LT":   {descr: "JUMP IF LESS THAN", opcode: 0x19, numOps: 1, instrLength: 3},
-    "GT":   {descr: "JUMP IF GREATER THAN", opcode: 0x1A, numOps: 1, instrLength: 3},
-    "EL":   {descr: "JUMP IF EQUAL OR LESS THAN", opcode: 0x1B, numOps: 1, instrLength: 3},
-    "EG":   {descr: "JUMP IF EQUAL OR GREATER THAN", opcode: 0x1C, numOps: 1, instrLength: 3},
-    "JM":   {descr: "JUMP", opcode: 0x1D, numOps: 0, instrLength: 1},
-    "JS":   {descr: "JUMP TO SUBROUTINE", opcode: 0x1E, numOps: 2, instrLength: 5},
-    "RT":   {descr: "RETURN", opcode: 0x1F, numOps: 1, instrLength: 3},
+	"NO":   {descr: "NO OPERATION", opcode: 0x00, numOps: 0, instrLength: 1},
+	"CO8":  {descr: "COPY", opcode: 0x01, numOps: 2, instrLength: 4},
+	"CO16": {descr: "COPY", opcode: 0x02, numOps: 2, instrLength: 5},
+	"AD8":  {descr: "ADD", opcode: 0x03, numOps: 2, instrLength: 4},
+	"AD16": {descr: "ADD", opcode: 0x04, numOps: 2, instrLength: 5},
+	"SU8":  {descr: "SUBTRACT", opcode: 0x05, numOps: 2, instrLength: 4},
+	"SU16": {descr: "SUBTRACT", opcode: 0x06, numOps: 2, instrLength: 5},
+	"MU8":  {descr: "MULTIPLY", opcode: 0x07, numOps: 2, instrLength: 4},
+	"MU16": {descr: "MULTIPLY", opcode: 0x08, numOps: 2, instrLength: 5},
+	"DV8":  {descr: "DIVIDE", opcode: 0x09, numOps: 2, instrLength: 4},
+	"DV16": {descr: "DIVIDE", opcode: 0x0A, numOps: 2, instrLength: 5},
+	"ND8":  {descr: "BITWISE AND", opcode: 0x0B, numOps: 2, instrLength: 4},
+	"ND16": {descr: "BITWISE AND", opcode: 0x0C, numOps: 2, instrLength: 5},
+	"OR8":  {descr: "BITWISE OR", opcode: 0x0D, numOps: 2, instrLength: 4},
+	"OR16": {descr: "BITWISE OR", opcode: 0x0E, numOps: 2, instrLength: 5},
+	"XR8":  {descr: "BITWISE XOR", opcode: 0x0F, numOps: 2, instrLength: 4},
+	"XR16": {descr: "BITWISE XOR", opcode: 0x10, numOps: 2, instrLength: 5},
+	"SL8":  {descr: "BITWISE SHIFT LEFT", opcode: 0x11, numOps: 2, instrLength: 4},
+	"SL16": {descr: "BITWISE SHIFT LEFT", opcode: 0x12, numOps: 2, instrLength: 5},
+	"SR8":  {descr: "BITWISE SHIFT RIGHT", opcode: 0x13, numOps: 2, instrLength: 4},
+	"SR16": {descr: "BITWISE SHIFT RIGHT", opcode: 0x15, numOps: 2, instrLength: 5},
+	"CM8":  {descr: "COMPARE", opcode: 0x15, numOps: 2, instrLength: 4},
+	"CM16": {descr: "COMPARE", opcode: 0x16, numOps: 2, instrLength: 5},
+	"EQ":   {descr: "JUMP IF EQUAL", opcode: 0x17, numOps: 1, instrLength: 3},
+	"NE":   {descr: "JUMP IF NOT EQUAL", opcode: 0x18, numOps: 1, instrLength: 3},
+	"LT":   {descr: "JUMP IF LESS THAN", opcode: 0x19, numOps: 1, instrLength: 3},
+	"GT":   {descr: "JUMP IF GREATER THAN", opcode: 0x1A, numOps: 1, instrLength: 3},
+	"EL":   {descr: "JUMP IF EQUAL OR LESS THAN", opcode: 0x1B, numOps: 1, instrLength: 3},
+	"EG":   {descr: "JUMP IF EQUAL OR GREATER THAN", opcode: 0x1C, numOps: 1, instrLength: 3},
+	"JM":   {descr: "JUMP", opcode: 0x1D, numOps: 0, instrLength: 1},
+	"JS":   {descr: "JUMP TO SUBROUTINE", opcode: 0x1E, numOps: 2, instrLength: 5},
+	"RT":   {descr: "RETURN", opcode: 0x1F, numOps: 1, instrLength: 3},
 
 	// Directives
-    "$8":  {descr: "DATA DIRECTIVE", opcode: 0x00, numOps: 0, instrLength: 0},
-    "$16": {descr: "DATA DIRECTIVE", opcode: 0x00, numOps: 0, instrLength: 0},
+	"$8":  {descr: "DATA DIRECTIVE", opcode: 0x00, numOps: 0, instrLength: 0},
+	"$16": {descr: "DATA DIRECTIVE", opcode: 0x00, numOps: 0, instrLength: 0},
 }
 
 // -----------------------------------------------------------------------------
@@ -402,8 +402,8 @@ func getLabelAddresses(srcLines []srcLine) map[string]int {
 func expandLabels(srcLines []srcLine, labelAddresses map[string]int) ([]srcLine, error) {
 	var expandedSrcLines []srcLine
 
-    errMessageStart := ":\tLabel "
-    errMessageEnd := " not defined"
+	errMessageStart := ":\tLabel "
+	errMessageEnd := " not defined"
 
 	for _, srcLine := range srcLines {
 		currentSrcLine := srcLine
@@ -455,29 +455,29 @@ func validateOps(srcLines []srcLine) (bool, error) {
 	errMessage := ":\tInvalid operand "
 
 	for _, srcLine := range srcLines {
-        if !isValidDataDirective(srcLine.mnemonic) {
-            switch mnemonics[srcLine.mnemonic].numOps {
-            case 0:
-                if srcLine.op1 != "" || srcLine.op2 != "" {
-                    return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs no operands")
-                }
-            case 1:
-                if srcLine.op1 == "" || srcLine.op2 != "" {
-                    return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs one operand")
-                }
-            case 2:
-                if srcLine.op1 == "" || srcLine.op2 == "" {
-                    return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs two operands")
-                }
-            }
+		if !isValidDataDirective(srcLine.mnemonic) {
+			switch mnemonics[srcLine.mnemonic].numOps {
+			case 0:
+				if srcLine.op1 != "" || srcLine.op2 != "" {
+					return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs no operands")
+				}
+			case 1:
+				if srcLine.op1 == "" || srcLine.op2 != "" {
+					return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs one operand")
+				}
+			case 2:
+				if srcLine.op1 == "" || srcLine.op2 == "" {
+					return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\t" + srcLine.mnemonic + " needs two operands")
+				}
+			}
 
-            if srcLine.op1 != "" && !isValidHexString(srcLine.op1) {
-                return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + errMessage + srcLine.op1)
-            }
+			if srcLine.op1 != "" && !isValidHexString(srcLine.op1) {
+				return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + errMessage + srcLine.op1)
+			}
 
-            if srcLine.op2 != "" && !isValidHexString(srcLine.op2) {
-                return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + errMessage + srcLine.op2)
-            }
+			if srcLine.op2 != "" && !isValidHexString(srcLine.op2) {
+				return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + errMessage + srcLine.op2)
+			}
 		}
 	}
 

@@ -67,7 +67,7 @@ func buildStructSrc(srcLines []string) []srcLine {
 				mnemonic, data = splitSrcDataLine(srcLineString)
 			} else {
 				mnemonic, op1, op2 = splitSrcCodeLine(srcLineString)
-                mnemonic = strings.ToUpper(mnemonic)
+				mnemonic = strings.ToUpper(mnemonic)
 
 				op1Type, op1 = splitOp(op1)
 				op2Type, op2 = splitOp(op2)

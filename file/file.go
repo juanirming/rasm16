@@ -82,7 +82,7 @@ func WriteBin(bin []byte, binName string) error {
 		return err
 	}
 
-	fmt.Println("Wrote", len(bin), "bytes to " + binName)
+	fmt.Println("Wrote", len(bin), "bytes to "+binName)
 
 	return nil
 }
