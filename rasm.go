@@ -25,8 +25,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"rasm/assemble"
-	"rasm/file"
+	"github.com/juanirming/rasm16/assemble"
+	"github.com/juanirming/rasm16/file"
 	"strconv"
 )
 

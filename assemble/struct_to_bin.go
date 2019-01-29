@@ -94,7 +94,7 @@ func buildOpcode(srcLine srcLine) srcLine {
 	opcodeSrcLine := srcLine
 
 	opcode := mnemonics[srcLine.mnemonic].opcode
-	opcode <<= 5
+	opcode <<= 3
 
 	if srcLine.op1Type == literalOp && srcLine.op2Type == addressOp {
 		opcode |= 0x00
@@ -126,12 +126,6 @@ func buildOps(srcLine srcLine) srcLine {
 	switch mnemonics[srcLine.mnemonic].instrLength {
 	case 3:
 		data64, _ = strconv.ParseUint(srcLine.op1, 16, 16)
-		opsSrcLine.bin = appendUint16(opsSrcLine.bin, uint16(data64))
-	case 4:
-		data64, _ = strconv.ParseUint(srcLine.op1, 16, 16)
-		opsSrcLine.bin = append(opsSrcLine.bin, byte(data64))
-
-		data64, _ = strconv.ParseUint(srcLine.op2, 16, 16)
 		opsSrcLine.bin = appendUint16(opsSrcLine.bin, uint16(data64))
 	case 5:
 		data64, _ = strconv.ParseUint(srcLine.op1, 16, 16)

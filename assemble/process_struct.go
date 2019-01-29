@@ -30,7 +30,7 @@ import (
 // -----------------------------------------------------------------------------
 
 // Maximum address space limit.
-const maxAddressSpace int = 0xFFB0 - 2*64 // Leaving space for call stack below Stack Pointer.
+const maxAddressSpace int = 0xFFB0 - 2*128 // Leaving space for call stack below Stack Pointer.
 
 // Parser token definitions.
 const (
@@ -113,27 +113,27 @@ type mnemonic struct {
 var mnemonics = map[string]mnemonic{
 	// Instructions
 	"NO":   {descr: "NO OPERATION", opcode: 0x00, numOps: 0, instrLength: 1},
-	"CO8":  {descr: "COPY", opcode: 0x01, numOps: 2, instrLength: 4},
+	"CO8":  {descr: "COPY", opcode: 0x01, numOps: 2, instrLength: 5},
 	"CO16": {descr: "COPY", opcode: 0x02, numOps: 2, instrLength: 5},
-	"AD8":  {descr: "ADD", opcode: 0x03, numOps: 2, instrLength: 4},
+	"AD8":  {descr: "ADD", opcode: 0x03, numOps: 2, instrLength: 5},
 	"AD16": {descr: "ADD", opcode: 0x04, numOps: 2, instrLength: 5},
-	"SU8":  {descr: "SUBTRACT", opcode: 0x05, numOps: 2, instrLength: 4},
+	"SU8":  {descr: "SUBTRACT", opcode: 0x05, numOps: 2, instrLength: 5},
 	"SU16": {descr: "SUBTRACT", opcode: 0x06, numOps: 2, instrLength: 5},
-	"MU8":  {descr: "MULTIPLY", opcode: 0x07, numOps: 2, instrLength: 4},
+	"MU8":  {descr: "MULTIPLY", opcode: 0x07, numOps: 2, instrLength: 5},
 	"MU16": {descr: "MULTIPLY", opcode: 0x08, numOps: 2, instrLength: 5},
-	"DV8":  {descr: "DIVIDE", opcode: 0x09, numOps: 2, instrLength: 4},
+	"DV8":  {descr: "DIVIDE", opcode: 0x09, numOps: 2, instrLength: 5},
 	"DV16": {descr: "DIVIDE", opcode: 0x0A, numOps: 2, instrLength: 5},
-	"ND8":  {descr: "BITWISE AND", opcode: 0x0B, numOps: 2, instrLength: 4},
+	"ND8":  {descr: "BITWISE AND", opcode: 0x0B, numOps: 2, instrLength: 5},
 	"ND16": {descr: "BITWISE AND", opcode: 0x0C, numOps: 2, instrLength: 5},
-	"OR8":  {descr: "BITWISE OR", opcode: 0x0D, numOps: 2, instrLength: 4},
+	"OR8":  {descr: "BITWISE OR", opcode: 0x0D, numOps: 2, instrLength: 5},
 	"OR16": {descr: "BITWISE OR", opcode: 0x0E, numOps: 2, instrLength: 5},
-	"XR8":  {descr: "BITWISE XOR", opcode: 0x0F, numOps: 2, instrLength: 4},
+	"XR8":  {descr: "BITWISE XOR", opcode: 0x0F, numOps: 2, instrLength: 5},
 	"XR16": {descr: "BITWISE XOR", opcode: 0x10, numOps: 2, instrLength: 5},
-	"SL8":  {descr: "BITWISE SHIFT LEFT", opcode: 0x11, numOps: 2, instrLength: 4},
+	"SL8":  {descr: "BITWISE SHIFT LEFT", opcode: 0x11, numOps: 2, instrLength: 5},
 	"SL16": {descr: "BITWISE SHIFT LEFT", opcode: 0x12, numOps: 2, instrLength: 5},
-	"SR8":  {descr: "BITWISE SHIFT RIGHT", opcode: 0x13, numOps: 2, instrLength: 4},
+	"SR8":  {descr: "BITWISE SHIFT RIGHT", opcode: 0x13, numOps: 2, instrLength: 5},
 	"SR16": {descr: "BITWISE SHIFT RIGHT", opcode: 0x15, numOps: 2, instrLength: 5},
-	"CM8":  {descr: "COMPARE", opcode: 0x15, numOps: 2, instrLength: 4},
+	"CM8":  {descr: "COMPARE", opcode: 0x15, numOps: 2, instrLength: 5},
 	"CM16": {descr: "COMPARE", opcode: 0x16, numOps: 2, instrLength: 5},
 	"EQ":   {descr: "JUMP IF EQUAL", opcode: 0x17, numOps: 1, instrLength: 3},
 	"NE":   {descr: "JUMP IF NOT EQUAL", opcode: 0x18, numOps: 1, instrLength: 3},
