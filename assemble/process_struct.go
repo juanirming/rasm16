@@ -141,8 +141,8 @@ var mnemonics = map[string]mnemonic{
 	"GT":   {descr: "JUMP IF GREATER THAN", opcode: 0x1A, numOps: 1, instrLength: 3},
 	"EL":   {descr: "JUMP IF EQUAL OR LESS THAN", opcode: 0x1B, numOps: 1, instrLength: 3},
 	"EG":   {descr: "JUMP IF EQUAL OR GREATER THAN", opcode: 0x1C, numOps: 1, instrLength: 3},
-	"JM":   {descr: "JUMP", opcode: 0x1D, numOps: 0, instrLength: 1},
-	"JS":   {descr: "JUMP TO SUBROUTINE", opcode: 0x1E, numOps: 2, instrLength: 5},
+	"JM":   {descr: "JUMP", opcode: 0x1D, numOps: 1, instrLength: 3},
+	"JS":   {descr: "JUMP TO SUBROUTINE", opcode: 0x1E, numOps: 1, instrLength: 3},
 	"RT":   {descr: "RETURN", opcode: 0x1F, numOps: 1, instrLength: 3},
 
 	// Directives
@@ -477,6 +477,10 @@ func validateOps(srcLines []srcLine) (bool, error) {
 
 			if srcLine.op2 != "" && !isValidHexString(srcLine.op2) {
 				return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + errMessage + srcLine.op2)
+			}
+
+			if srcLine.op2 != "" && srcLine.op2Type == literalOp {
+                return false, errors.New(strconv.Itoa(srcLine.lineNum+1) + ":\tInvalid target operand type " + opDescr[literalOp])
 			}
 		}
 	}
