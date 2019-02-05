@@ -76,18 +76,26 @@ var defaultConsts = map[string]string{
 	"[OUT6]": "FFEC", // OUTPUT6
 	"[OUT7]": "FFEE", // OUTPUT7
 	"[GP0]":  "FFF0", // GENERAL0
+	"[GP0L]": "FFF1", // GENERAL0 LOW BYTE
 	"[GP1]":  "FFF2", // GENERAL1
+	"[GP1L]": "FFF3", // GENERAL1 LOW BYTE
 	"[GP2]":  "FFF4", // GENERAL2
+	"[GP2L]": "FFF5", // GENERAL2 LOW BYTE
 	"[GP3]":  "FFF6", // GENERAL3
+	"[GP3L]": "FFF7", // GENERAL3 LOW BYTE
 	"[GP4]":  "FFF8", // GENERAL4
+	"[GP4L]": "FFF9", // GENERAL4 LOW BYTE
 	"[GP5]":  "FFFA", // GENERAL5
+	"[GP5L]": "FFFB", // GENERAL5 LOW BYTE
 	"[GP6]":  "FFFC", // GENERAL6
+	"[GP6L]": "FFFD", // GENERAL6 LOW BYTE
 	"[GP7]":  "FFFE", // GENERAL7
+	"[GP7L]": "FFFF", // GENERAL7 LOW BYTE
 
 	// Magic Values
-	"[TRUE]":  "1",
+	"[TRUE]":  "0001",
 	"[FALSE]": "FFFF",
-	"[NULL]":  "0",
+	"[NULL]":  "0000",
 }
 
 // -----------------------------------------------------------------------------
